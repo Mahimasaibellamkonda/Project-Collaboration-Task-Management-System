@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProjectFlow | Project Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <div class="logo-mark">P</div>
+            <div>
+                <h2>ProjectFlow</h2>
+                <span>Workspace</span>
+            </div>
+        </div>
+
+        <nav>
+            <button class="nav-item active" data-section="dashboard">
+                <span>⌂</span> Dashboard
+            </button>
+
+            <button class="nav-item" data-section="projects">
+                <span>▣</span> Projects
+            </button>
+
+            <button class="nav-item" data-section="tasks">
+                <span>✓</span> Tasks
+            </button>
+
+            <button class="nav-item" data-section="team">
+                <span>♙</span> Team
+            </button>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="workspace-box">
+                <span class="status-dot"></span>
+                <div>
+                    <strong>Workspace</strong>
+                    <small>Engineering Team</small>
+                </div>
+            </div>
+
+            <button class="profile">
+                <div class="avatar">M</div>
+                <div>
+                    <strong>Mahima</strong>
+                    <small>Administrator</small>
+                </div>
+            </button>
+        </div>
+    </aside>
+
+
+    <!-- Main -->
+    <main class="main">
+
+        <!-- Header -->
+        <header class="topbar">
+            <div>
+                <p class="breadcrumb">Workspace / Overview</p>
+                <h1 id="pageTitle">Dashboard</h1>
+            </div>
+
+            <div class="top-actions">
+                <div class="search">
+                    <span>⌕</span>
+                    <input type="text" id="globalSearch" placeholder="Search projects or tasks...">
+                </div>
+
+                <button class="icon-btn" title="Notifications">♢</button>
+
+                <button class="primary-btn" id="newProjectBtn">
+                    + New Project
+                </button>
+            </div>
+        </header>
+
+
+        <!-- Dashboard -->
+        <section class="content-section active-section" id="dashboard">
+
+            <div class="welcome">
+                <div>
+                    <p class="eyebrow">OVERVIEW</p>
+                    <h2>Good evening, Mahima.</h2>
+                    <p>Here's what's happening across your projects today.</p>
+                </div>
+
+                <div class="date-box">
+                    <span>Today</span>
+                    <strong id="currentDate"></strong>
+                </div>
+            </div>
+
+
+            <!-- Stats -->
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <div class="stat-icon blue">▣</div>
+                    <div>
+                        <span>Active Projects</span>
+                        <strong id="activeProjects">0</strong>
+                    </div>
+                    <small class="positive">↑ 12%</small>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon purple">✓</div>
+                    <div>
+                        <span>Total Tasks</span>
+                        <strong id="totalTasks">0</strong>
+                    </div>
+                    <small class="positive">↑ 8%</small>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon green">◉</div>
+                    <div>
+                        <span>Completed</span>
+                        <strong id="completedTasks">0</strong>
+                    </div>
+                    <small class="positive">↑ 18%</small>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon orange">!</div>
+                    <div>
+                        <span>Due Soon</span>
+                        <strong id="dueSoon">0</strong>
+                    </div>
+                    <small class="warning">Needs attention</small>
+                </div>
+
+            </div>
+
+
+            <!-- Dashboard grid -->
+            <div class="dashboard-grid">
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <div>
+                            <h3>Projects</h3>
+                            <p>Your active projects and progress</p>
+                        </div>
+
+                        <button class="text-btn" data-section-target="projects">
+                            View all →
+                        </button>
+                    </div>
+
+                    <div id="dashboardProjects" class="project-list"></div>
+                </div>
+
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <div>
+                            <h3>My Tasks</h3>
+                            <p>Your latest assignments</p>
+                        </div>
+
+                        <button class="text-btn" data-section-target="tasks">
+                            View all →
+                        </button>
+                    </div>
+
+                    <div id="dashboardTasks"></div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Projects -->
+        <section class="content-section" id="projects">
+
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">WORKSPACE</p>
+                    <h2>Projects</h2>
+                    <p>Manage your team's projects and track progress.</p>
+                </div>
+
+                <button class="primary-btn" id="newProjectBtn2">
+                    + New Project
+                </button>
+            </div>
+
+            <div class="filter-row">
+                <button class="filter active" data-filter="all">All</button>
+                <button class="filter" data-filter="active">Active</button>
+                <button class="filter" data-filter="completed">Completed</button>
+            </div>
+
+            <div id="projectsGrid" class="projects-grid"></div>
+
+        </section>
+
+
+        <!-- Tasks -->
+        <section class="content-section" id="tasks">
+
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">WORK MANAGEMENT</p>
+                    <h2>Tasks</h2>
+                    <p>Track, organize and complete your team's work.</p>
+                </div>
+
+                <button class="primary-btn" id="newTaskBtn">
+                    + New Task
+                </button>
+            </div>
+
+            <div class="task-toolbar">
+                <div class="task-search">
+                    <span>⌕</span>
+                    <input type="text" id="taskSearch" placeholder="Search tasks...">
+                </div>
+
+                <select id="statusFilter">
+                    <option value="all">All statuses</option>
+                    <option value="todo">To Do</option>
+                    <option value="progress">In Progress</option>
+                    <option value="completed">Completed</option>
+                </select>
+
+                <select id="priorityFilter">
+                    <option value="all">All priorities</option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+            </div>
+
+            <div class="panel task-panel">
+                <div class="task-table-header">
+                    <span>Task</span>
+                    <span>Project</span>
+                    <span>Assignee</span>
+                    <span>Priority</span>
+                    <span>Status</span>
+                    <span>Due date</span>
+                    <span></span>
+                </div>
+
+                <div id="tasksList"></div>
+            </div>
+
+        </section>
+
+
+        <!-- Team -->
+        <section class="content-section" id="team">
+
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">PEOPLE</p>
+                    <h2>Team</h2>
+                    <p>Manage your project team members.</p>
+                </div>
+
+                <button class="primary-btn" id="addMemberBtn">
+                    + Add Member
+                </button>
+            </div>
+
+            <div id="teamGrid" class="team-grid"></div>
+
+        </section>
+
+    </main>
+</div>
+
+
+<!-- Project Modal -->
+<div class="modal" id="projectModal">
+    <div class="modal-box">
+
+        <div class="modal-header">
+            <div>
+                <h2>Create New Project</h2>
+                <p>Add a new project to your workspace.</p>
+            </div>
+
+            <button class="close-btn" data-close="projectModal">×</button>
+        </div>
+
+        <form id="projectForm">
+
+            <label>Project Name</label>
+            <input type="text" id="projectName" placeholder="e.g. Campus Management System" required>
+
+            <label>Description</label>
+            <textarea id="projectDescription" placeholder="Briefly describe the project..." required></textarea>
+
+            <label>Deadline</label>
+            <input type="date" id="projectDeadline" required>
+
+            <div class="modal-actions">
+                <button type="button" class="secondary-btn" data-close="projectModal">
+                    Cancel
+                </button>
+
+                <button type="submit" class="primary-btn">
+                    Create Project
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+<!-- Task Modal -->
+<div class="modal" id="taskModal">
+    <div class="modal-box">
+
+        <div class="modal-header">
+            <div>
+                <h2>Create New Task</h2>
+                <p>Assign a task to your project team.</p>
+            </div>
+
+            <button class="close-btn" data-close="taskModal">×</button>
+        </div>
+
+        <form id="taskForm">
+
+            <label>Task Name</label>
+            <input type="text" id="taskName" placeholder="e.g. Design login page" required>
+
+            <label>Project</label>
+            <select id="taskProject" required></select>
+
+            <label>Assignee</label>
+            <select id="taskAssignee" required></select>
+
+            <label>Priority</label>
+            <select id="taskPriority">
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+            </select>
+
+            <label>Due Date</label>
+            <input type="date" id="taskDeadline" required>
+
+            <div class="modal-actions">
+                <button type="button" class="secondary-btn" data-close="taskModal">
+                    Cancel
+                </button>
+
+                <button type="submit" class="primary-btn">
+                    Create Task
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+<!-- Member Modal -->
+<div class="modal" id="memberModal">
+    <div class="modal-box">
+
+        <div class="modal-header">
+            <div>
+                <h2>Add Team Member</h2>
+                <p>Add a new member to your workspace.</p>
+            </div>
+
+            <button class="close-btn" data-close="memberModal">×</button>
+        </div>
+
+        <form id="memberForm">
+
+            <label>Full Name</label>
+            <input type="text" id="memberName" placeholder="e.g. Rahul Kumar" required>
+
+            <label>Email</label>
+            <input type="email" id="memberEmail" placeholder="rahul@example.com" required>
+
+            <label>Role</label>
+            <input type="text" id="memberRole" placeholder="e.g. Frontend Developer" required>
+
+            <div class="modal-actions">
+                <button type="button" class="secondary-btn" data-close="memberModal">
+                    Cancel
+                </button>
+
+                <button type="submit" class="primary-btn">
+                    Add Member
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+<script src="script.js"></script>
+</body>
+</html>
